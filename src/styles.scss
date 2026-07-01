@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --dark-color: #000;
+  --light-color: #fff
+}
+
+body {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+}
+
+.sill-tag {
+  display: inline;
+  width: max-content;
+  padding: 4px 8px;
+  margin-right: 4px;
+  border: 1px solid var(--light-color);
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
