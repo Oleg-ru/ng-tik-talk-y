@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProfileCard } from './common-ui/profile-card/profile-card';
 
 @Component({
@@ -8,5 +8,4 @@ import { ProfileCard } from './common-ui/profile-card/profile-card';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('ng-tik-talke-y');
 }
