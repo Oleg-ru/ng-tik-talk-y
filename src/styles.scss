@@ -6,6 +6,14 @@
   --primary-color: #AE7AFF;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: var(--dark-color);
   color: var(--light-color);
@@ -16,11 +24,11 @@ body {
   display: inline;
   width: max-content;
   padding: 4px 8px;
-  margin-right: 4px;
   border: 1px solid var(--light-color);
   border-radius: 2px;
   font-size: 12px;
   font-weight: 700;
+  height: 24px;
 }
 
 .btn {

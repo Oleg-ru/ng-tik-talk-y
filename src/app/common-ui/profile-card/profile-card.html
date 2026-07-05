@@ -1,24 +1,30 @@
-<div class="profile-card">
-  <div class="avatar-name">
-    <img src="/assets/images/avatar.webp" alt="avatar" class="profile-card__avatar">
-    <div class="profile-card__name">
-       <strong class="h6">Запоминатор Ангуляра</strong>
-      <span class="subtitle">angu.gu</span>
+@if (profile()) {
+  <div class="profile-card">
+    <div class="avatar-name">
+      <img
+        [src]="profile()?.avatarUrl | imgUrl"
+        [alt]="profile()?.lastName" class="profile-card__avatar"
+      >
+      <div class="profile-card__name">
+        <strong class="h6">{{profile()?.firstName}} {{profile()?.lastName}}</strong>
+        <span class="subtitle">{{profile()?.username}}</span>
+      </div>
+    </div>
+
+    <div class="profile-card__description">
+      {{profile()?.description}}
+    </div>
+    <div class="profile-card__tags">
+      @for (skill of profile()?.stack; track crypto.randomUUID()) {
+        <div class="skill-tag">{{skill}}</div>
+      }
+    </div>
+
+    <div class="profile-card__action-buttons">
+      <button class="btn">Подписаться</button>
     </div>
   </div>
+} @else {
 
-  <div class="profile-card__description">
-     Список навыков для Ангуляра велик, но не велик чем сам Framework. Овладеть им может каждый, но не каждый может владеть им как Брюс Ли своим телом и разумом.
-  </div>
-  <div class="profile-card__tags">
-    <div class="skill-tag">Angular</div>
-    <div class="skill-tag">JS</div>
-    <div class="skill-tag">HTML</div>
-    <div class="skill-tag">CSS</div>
-    <div class="skill-tag">Dev Tools</div>
-  </div>
+}
 
-  <div class="profile-card__action-buttons">
-    <button class="btn">Подписаться</button>
-  </div>
-</div>
