@@ -8,7 +8,6 @@ export class ImgUrlPipe implements PipeTransform {
     if (!value) {
       return undefined;
     }
-    console.log(`https://icherniakov.ru/yt-course/${value}`);
     return `https://icherniakov.ru/yt-course/${value}`;
   }
 }

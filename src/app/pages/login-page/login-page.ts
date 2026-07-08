@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth-service';
-import { delay, from, map, skip, take, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -11,6 +11,7 @@ import { delay, from, map, skip, take, tap } from 'rxjs';
 })
 export class LoginPage {
   authService = inject(AuthService);
+  router = inject(Router);
 
   form = new FormGroup({
     username: new FormControl<string | null>(null, Validators.required),
@@ -21,6 +22,7 @@ export class LoginPage {
     if (this.form.valid) {
       //@ts-ignore
       this.authService.login(this.form.value).subscribe(value => {
+        this.router.navigate([''])
         console.log(value);
       });
     }
