@@ -1,1 +1,10 @@
-<p>subscriber-card works!</p>
+<img [src]="profile().avatarUrl | imgUrl"
+     [alt]="profile().lastName"
+     class="subscriber-avatar"
+>
+<strong class="subtitle">{{profile().lastName}} {{profile().firstName}}</strong>
+
+<div class="mt20 to-subscribers">
+  <a [routerLink]="['/subscribers']" class="to-subscribers-link medium-text">Все подписчики</a>
+  <svg [icon]="'arrow'" class="to-subscribers-icon"></svg>
+</div>
