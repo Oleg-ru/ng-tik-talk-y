@@ -1,14 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SvgIcon } from '../svg-icon/svg-icon';
 import { SubscriberCard } from './subscriber-card/subscriber-card';
+import { ProfileService } from '../../data/services/profile';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [SvgIcon, SubscriberCard],
+  imports: [SvgIcon, SubscriberCard, AsyncPipe, JsonPipe, RouterLink],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
+  profileService = inject(ProfileService);
+  subscribers$ = this.profileService.getSubscribersShortList();
+
   menuItems = [
     {
       label: 'Моя страница',
@@ -26,15 +32,4 @@ export class Sidebar {
       link: 'search',
     },
   ];
-  userProfile = {
-    id: 1,
-    username: 'johndoe',
-    description: 'Full-stack developer passionate about Angular and TypeScript',
-    avatarUrl: 'https://example.com/avatars/johndoe.jpg',
-    subscribersAmount: 1250,
-    firstName: 'John',
-    lastName: 'Doe',
-    isActive: true,
-    stack: ['Angular', 'React', 'Node.js', 'TypeScript', 'Python'],
-  };
 }
