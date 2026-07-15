@@ -6,7 +6,7 @@ import { SvgIcon } from '../../svg-icon/svg-icon';
 
 @Component({
   selector: 'app-subscriber-card',
-  imports: [ImgUrlPipe, RouterLink, SvgIcon],
+  imports: [ImgUrlPipe],
   templateUrl: './subscriber-card.html',
   styleUrl: './subscriber-card.scss',
 })
