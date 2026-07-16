@@ -15,11 +15,12 @@ import { AsyncPipe } from '@angular/common';
 export class ProfilePage {
   profileService = inject(ProfileService);
   route = inject(ActivatedRoute);
+  me$ = toObservable(this.profileService.me);
 
   profile$ = this.route.params.pipe(
     switchMap(({ id }) => {
       if (id === 'me') {
-        return toObservable(this.profileService.me);
+        return this.me$;
       }
 
       return this.profileService.getAccount(id);
