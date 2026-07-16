@@ -24,6 +24,11 @@ export class ProfileService {
       )
   }
 
+  getAccount(id: string) {
+    return this.http.get<Profile>(`${BASE_API_URL}/account/${id}`);
+
+  }
+
   getSubscribersShortList() {
     return this.http.get<Pageble<Profile>>(`${BASE_API_URL}/account/subscribers/`)
       .pipe(
