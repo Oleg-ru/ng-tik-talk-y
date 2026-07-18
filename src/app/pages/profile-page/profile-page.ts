@@ -16,6 +16,7 @@ import { SvgIcon } from '../../common-ui/svg-icon/svg-icon';
 export class ProfilePage {
   profileService = inject(ProfileService);
   route = inject(ActivatedRoute);
+
   me$ = toObservable(this.profileService.me);
 
   profile$ = this.route.params.pipe(
