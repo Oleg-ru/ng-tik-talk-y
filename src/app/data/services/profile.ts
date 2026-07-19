@@ -29,10 +29,9 @@ export class ProfileService {
 
   }
 
-  getSubscribersShortList() {
-    return this.http.get<Pageble<Profile>>(`${BASE_API_URL}/account/subscribers/`)
-      .pipe(
-        map(resp => resp.items.slice(0, 3))
-      )
+  getSubscribersShortList(subsAmount = 3) {
+    return this.http
+      .get<Pageble<Profile>>(`${BASE_API_URL}/account/subscribers/`)
+      .pipe(map((resp) => resp.items.slice(0, subsAmount)));
   }
 }
