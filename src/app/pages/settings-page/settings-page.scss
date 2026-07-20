@@ -5,10 +5,17 @@
   grid-template-columns: 322px 1fr;
 }
 
-.profile-form {
+.profile-form__wrapper {
+  height: calc(100dvh - (24px * 4));
   padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: 1px solid var(--light-color);
   background: var(--dark-color);
+}
+
+.profile-form {
   display: grid;
   grid-gap: 20px;
 }

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, effect, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ProfileService } from '../../data/services/profile';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-settings-page',
@@ -8,11 +10,55 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './settings-page.scss',
 })
 export class SettingsPage {
-  form = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl( '', [Validators.required]),
-    username: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
-    stack: new FormControl(''),
+  fb = inject(FormBuilder);
+  profileService = inject(ProfileService);
+
+  form: FormGroup = this.fb.group({
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
+    username: [{ value: '', disabled: true }],
+    description: [''],
+    stack: [''],
   });
+
+  constructor() {
+    effect(() => {
+      //@ts-ignore
+      this.form.patchValue({
+        ...this.profileService.me(),
+        //@ts-ignore
+        stack: this.mergeStack(this.profileService.me()?.stack),
+      });
+    });
+  }
+
+
+  onSave() {
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity();
+
+    if (this.form.invalid) return;
+
+    const stack = this.splitStack(this.form.value.stack)
+    debugger
+    firstValueFrom(
+      this.profileService.parchProfile({
+        ...this.form.value,
+        stack,
+      }),
+    );
+  }
+
+  splitStack(stack: string | null | string[] | undefined): string[] {
+    if (!stack) return [];
+    if (Array.isArray(stack)) return stack;
+    return stack.split(',');
+  }
+
+  mergeStack(stack: string | null | string[] | undefined) {
+    if (!stack) return '';
+    if (Array.isArray(stack)) return stack.join(', ');
+
+    return stack;
+  }
 }

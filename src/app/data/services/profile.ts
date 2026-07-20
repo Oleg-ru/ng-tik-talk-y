@@ -34,4 +34,12 @@ export class ProfileService {
       .get<Pageble<Profile>>(`${BASE_API_URL}/account/subscribers/`)
       .pipe(map((resp) => resp.items.slice(0, subsAmount)));
   }
+
+  parchProfile(profile: Partial<Profile>) {
+    return this.http.patch<Profile>(
+      `${BASE_API_URL}/account/me`,
+      profile
+      );
+
+  }
 }
