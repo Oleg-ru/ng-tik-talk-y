@@ -1,0 +1,19 @@
+<img [src]="preview()" alt="" class="avatar">
+<div class="dropzone"
+     (keyup.enter)="fileDrop.click()"
+     tabindex="0"
+>
+  <div class="dropzone-content">
+    <span class="medium-text">
+      <svg icon="upload"></svg>
+    </span>
+    <div>Перетащите изображение или Загрузите</div>
+  </div>
+
+  <input class="avatar-input"
+         type="file"
+         #fileDrop
+         tabindex="-1"
+         (change)="fileBrowserHandler($event)"
+  >
+</div>

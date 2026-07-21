@@ -2,10 +2,11 @@ import { Component, effect, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile';
 import { firstValueFrom } from 'rxjs';
+import { AvatarUpload } from './avatar-upload/avatar-upload';
 
 @Component({
   selector: 'app-settings-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AvatarUpload],
   templateUrl: './settings-page.html',
   styleUrl: './settings-page.scss',
 })
@@ -32,15 +33,14 @@ export class SettingsPage {
     });
   }
 
-
   onSave() {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
 
     if (this.form.invalid) return;
 
-    const stack = this.splitStack(this.form.value.stack)
-    debugger
+    const stack = this.splitStack(this.form.value.stack);
+    debugger;
     firstValueFrom(
       this.profileService.parchProfile({
         ...this.form.value,
