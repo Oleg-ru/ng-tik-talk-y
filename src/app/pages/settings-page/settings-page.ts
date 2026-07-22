@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile';
 import { firstValueFrom } from 'rxjs';
@@ -13,6 +13,8 @@ import { AvatarUpload } from './avatar-upload/avatar-upload';
 export class SettingsPage {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
+
+  @ViewChild(AvatarUpload) avatarUploader!: AvatarUpload;
 
   form: FormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -39,8 +41,11 @@ export class SettingsPage {
 
     if (this.form.invalid) return;
 
+    if (this.avatarUploader.avatar) {
+      firstValueFrom(this.profileService.uploadAvatar(this.avatarUploader.avatar));
+    }
+
     const stack = this.splitStack(this.form.value.stack);
-    debugger;
     firstValueFrom(
       this.profileService.parchProfile({
         ...this.form.value,
