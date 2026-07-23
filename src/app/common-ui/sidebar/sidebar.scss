@@ -29,6 +29,7 @@
   align-items: center;
   text-decoration: none;
 
+  &.active,
   &:hover,
   &:focus-visible {
     background: var(--dark-hover-color);

@@ -3,13 +3,13 @@ import { SvgIcon } from '../svg-icon/svg-icon';
 import { SubscriberCard } from './subscriber-card/subscriber-card';
 import { ProfileService } from '../../data/services/profile';
 import { AsyncPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ImgUrlPipe } from '../../helpers/pipes/img-url-pipe';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [SvgIcon, SubscriberCard, AsyncPipe, RouterLink, ImgUrlPipe],
+  imports: [SvgIcon, SubscriberCard, AsyncPipe, RouterLink, ImgUrlPipe, RouterLinkActive],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })

@@ -12,6 +12,7 @@ const BASE_API_URL = 'https://icherniakov.ru/yt-course';
 export class ProfileService {
   http = inject(HttpClient);
   me = signal<Profile | null>(null);
+  filteredProfiles = signal<Profile[]>([]);
 
   getTestAccounts() {
    return  this.http.get<Array<Profile>>(`${BASE_API_URL}/account/test_accounts`);
@@ -46,5 +47,13 @@ export class ProfileService {
     const fd = new FormData();
     fd.append('image', file)
     return this.http.post<Profile>(`${BASE_API_URL}/account/upload_image`, fd);
+  }
+
+  filterProfiles(params: Record<string, any>) {
+    return this.http
+      .get<Pageble<Profile>>(`${BASE_API_URL}/account/accounts`, {
+        params,
+      })
+      .pipe(tap((resp) => this.filteredProfiles.set(resp.items)));
   }
 }
