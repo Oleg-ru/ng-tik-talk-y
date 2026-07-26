@@ -20,6 +20,7 @@ export class ProfileFilters {
     stack: ['']
   });
 
+
   constructor() {
     this.searchForm.valueChanges
       .pipe(
