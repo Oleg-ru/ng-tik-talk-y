@@ -14,10 +14,6 @@ export class ProfileService {
   me = signal<Profile | null>(null);
   filteredProfiles = signal<Profile[]>([]);
 
-  getTestAccounts() {
-   return  this.http.get<Array<Profile>>(`${BASE_API_URL}/account/test_accounts`);
-  }
-
   getMe() {
     return this.http.get<Profile>(`${BASE_API_URL}/account/me`)
       .pipe(
