@@ -52,4 +52,5 @@ export class ProfileService {
       })
       .pipe(tap((resp) => this.filteredProfiles.set(resp.items)));
   }
+
 }
