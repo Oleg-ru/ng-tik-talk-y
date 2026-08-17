@@ -21,7 +21,6 @@ export class ProfileService {
       )
   }
 
-
   getAccount(id: string) {
     return this.http.get<Profile>(`${BASE_API_URL}/account/${id}`);
 
