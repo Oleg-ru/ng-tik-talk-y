@@ -3,4 +3,3 @@ export interface TokenResponse {
   refresh_token: 'string';
   token_type: 'string';
 }
-
